@@ -3,6 +3,7 @@ import asyncio
 from azure.eventhub import EventData
 from azure.eventhub.aio import EventHubConsumerClient
 from azure.identity.aio import EnvironmentCredential
+#aiohttp
 
 fully_qualified_namespace = "rklabeventhub.servicebus.windows.net" #os.environ['EVENT_HUB_HOSTNAME']
 eventhub_name = "topic3" #os.environ['EVENT_HUB_NAME']

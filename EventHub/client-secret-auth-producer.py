@@ -4,6 +4,10 @@ from azure.eventhub import EventData
 from azure.eventhub.aio import EventHubProducerClient
 from azure.identity.aio import EnvironmentCredential
 from azure.identity import DefaultAzureCredential
+#pip install aiohttp
+#pip install asyncio
+#pip install azure.eventhub
+#pip install azure.identity
 
 """
 An example to show authentication using credentials defined by azure.identity library.
