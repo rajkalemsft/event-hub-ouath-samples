@@ -1,5 +1,5 @@
 # Azure EventHub OAuth samples
-[![Open in Remote - Containers](https://img.shields.io/static/v1?label=Remote%20-%20Containers&message=Open&color=blue&logo=visualstudiocode)](https://vscode.dev/redirect?url=vscode://ms-vscode-remote.remote-containers/cloneInVolume?https://github.com/rajkalemsft/event-hub-ouath-samples)
+[![Open in Remote - Containers](https://img.shields.io/static/v1?label=Remote%20-%20Containers&message=Open&color=blue&logo=visualstudiocode)](https://vscode.dev/redirect?url=vscode://event-hub-ouath-samples.remote-containers/cloneInVolume?https://github.com/rajkalemsft/event-hub-ouath-samples)
 
 **/eventhub** --> Includes producer and consumer sample with azure sdk for EventHub
 
