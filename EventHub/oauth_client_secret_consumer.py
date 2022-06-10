@@ -1,13 +1,14 @@
 import os
 import asyncio
-from azure.eventhub import EventData
 from azure.eventhub.aio import EventHubConsumerClient
 from azure.identity.aio import EnvironmentCredential
-#aiohttp
+from dotenv import load_dotenv
 
-fully_qualified_namespace = "rklabeventhub.servicebus.windows.net" #os.environ['EVENT_HUB_HOSTNAME']
-eventhub_name = "topic3" #os.environ['EVENT_HUB_NAME']
-consumer_group='$default'
+load_dotenv()
+
+FULLY_QUALIFIED_NAMESPACE= os.environ['EVENT_HUB_HOSTNAME']
+EVENTHUB_NAME = os.environ['EVENT_HUB_NAME']
+CONSUMER_GROUP='$Default'
 
 async def on_event(partition_context, event):
     # Put your code here.
@@ -40,13 +41,13 @@ async def on_error(partition_context, error):
 async def run():
     credential = EnvironmentCredential()
     async with credential:
-        consumer = EventHubConsumerClient(fully_qualified_namespace=fully_qualified_namespace,
-                                          eventhub_name=eventhub_name,
-                                          consumer_group= consumer_group,
+        consumer = EventHubConsumerClient(fully_qualified_namespace=FULLY_QUALIFIED_NAMESPACE,
+                                          eventhub_name=EVENTHUB_NAME,
+                                          consumer_group= CONSUMER_GROUP,
                                           credential=credential)
 
         async with consumer:
-             await consumer.receive(
+            await consumer.receive(
             on_event=on_event,
             on_error=on_error,
             on_partition_close=on_partition_close,

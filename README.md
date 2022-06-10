@@ -1,2 +1,3 @@
 # EventHubSamples
-EventHub for Apache Kafka Client Samples
+Event Hub samples
+
