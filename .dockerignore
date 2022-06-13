@@ -1,5 +1,4 @@
 .env
 .gitignore
-*.txt
 .devcontainer/
 .vscode/
