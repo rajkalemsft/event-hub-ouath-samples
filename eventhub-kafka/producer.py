@@ -2,25 +2,28 @@ import time
 from confluent_kafka import Producer
 from azure.identity import DefaultAzureCredential
 from dotenv import load_dotenv
+import os
 
 load_dotenv()
 
+FULLY_QUALIFIED_NAMESPACE= os.environ['EVENT_HUB_HOSTNAME']
+EVENTHUB_NAME = os.environ['EVENT_HUB_NAME']
+AUTH_SCOPE= "https://" + FULLY_QUALIFIED_NAMESPACE +"/.default"
+
 # AAD
 cred = DefaultAzureCredential()
-
 
 def _get_token(config):
     """Note here value of config comes from sasl.oauthbearer.config below.
     It is not used in this example but you can put arbitrary values to
     configure how you can get the token (e.g. which token URL to use)
     """
-    access_token = cred.get_token(
-        "https://rklabeventhub.servicebus.windows.net/.default")
+    access_token = cred.get_token(AUTH_SCOPE)
     return access_token.token, time.time() + access_token.expires_on
 
 
 producer = Producer({
-    "bootstrap.servers": "rklabeventhub.servicebus.windows.net:9093",
+    "bootstrap.servers": FULLY_QUALIFIED_NAMESPACE + ":9093",
     "sasl.mechanism": "OAUTHBEARER",
     "security.protocol": "SASL_SSL",
     "oauth_cb": _get_token,
@@ -47,7 +50,7 @@ for data in some_data_source:
     # Asynchronously produce a message, the delivery report callback
     # will be triggered from poll() above, or flush() below, when the message has
     # been successfully delivered or failed permanently.
-    producer.produce("topic1", data.encode("utf-8"), callback=delivery_report)
+    producer.produce(EVENTHUB_NAME, data.encode("utf-8"), callback=delivery_report)
 
 # Wait for any outstanding messages to be delivered and delivery report
 # callbacks to be triggered.
