@@ -33,6 +33,10 @@ Edit the .env file for below values before you open the repo in .devcontainer.
 
     AZURE_TENANT_ID=<<TenantID>>
 
+    AZURE_CLIENT_CERTIFICATE_PATH=<<AzureAdClientSecretCertPath>>
+    
+    AZURE_CLIENT_SEND_CERTIFICATE_CHAIN=<<TrueToValidateISsuesAndSubjectName>>
+  
     EVENT_HUB_HOSTNAME=<<EventHubNameSpace>>
 
     EVENT_HUB_NAME=<<EvemtHubName>>
