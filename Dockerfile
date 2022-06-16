@@ -21,4 +21,4 @@ RUN pip3 --disable-pip-version-check --no-cache-dir install -r /tmp/pip-tmp/requ
 # RUN su vscode -c "source /usr/local/share/nvm/nvm.sh && npm install -g <your-package-here>" 2>&1
 
 COPY . .
-CMD [ "python", "/eventhub-kafka/oauth_cert.py" ]
+CMD [ "python", "/eventhub-kafka/producer.py" ]
