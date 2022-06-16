@@ -5,24 +5,23 @@ Python code samples to demonstrate ability to connect to Azure EventHub with Kaf
 
 **Sample demonstrates,**
 
-1. Different authentication mechanisms for EventHub using AzureAD.
-2. Code uses VSCode devcontainer feature to run locally in an isolated environment.
-3. Has docker image definition to build the image
+  1. Different authentication mechanisms for EventHub using AzureAD.
+  2. Code uses VSCode devcontainer feature to run locally in an isolated environment.
+  3. Has docker image definition to build the image
 
 **Sample relies on below packages,**
 
-**Azure.Identity** -> For Azure AD AUTH. Please refer defaultazurecredential
+  **Azure.Identity** -> For Azure AD AUTH. Please refer defaultazurecredential
 
-**Confluent-Kafka** -> To connect to EventHub using Kafka protocol
+  **Confluent-Kafka** -> To connect to EventHub using Kafka protocol
 
-To get going, add below configurations to your local.settings.json or azure function configurations,
+**Repo Contents**
+  **/eventhub** --> Includes producer and consumer sample with azure sdk for EventHub
 
-**/eventhub** --> Includes producer and consumer sample with azure sdk for EventHub
-
-**/eventhub-kafka** --> Includes producer and consumer sample with confluent-kafka and Azure.Identity package
+  **/eventhub-kafka** --> Includes producer and consumer sample with confluent-kafka and Azure.Identity package
 
 **Setup**
-Edit the .env file for below values before open the repo in .devcontainer.
+Edit the .env file for below values before you open the repo in .devcontainer.
 
   AZURE_AUTHORITY_HOST=login.microsoftonline.com
   
@@ -44,7 +43,7 @@ Edit the .env file for below values before open the repo in .devcontainer.
   
   AZURE_KV_CLIENT_SECRET=<<ClientSecret-KeyVaultAccess>>
   
- ** Docker Container**
+** Docker Container**
  Build the container and publish to Azure Container Registry (ACR) 
     
     docker build -t <>.azurecr.io/<>:<> .
@@ -53,6 +52,6 @@ Edit the .env file for below values before open the repo in .devcontainer.
 
     docker push <>.azurecr.io/<>:<>
   
-** For ManagedIdentity Auth**, please refer to [azurefunc-eventhub-managedidentity-auth](https://github.com/rajkalemsft/azurefunc-eventhub-managedidentity-auth)
+  ** For ManagedIdentity Auth**, please refer to [azurefunc-eventhub-managedidentity-auth](https://github.com/rajkalemsft/azurefunc-eventhub-managedidentity-auth)
   
   
