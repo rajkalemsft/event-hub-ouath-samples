@@ -11,39 +11,42 @@ Python code samples to demonstrate ability to connect to Azure EventHub with Kaf
 
 **Sample relies on below packages,**
 
-  **Azure.Identity** -> For Azure AD AUTH. Please refer defaultazurecredential
+    **Azure.Identity** -> For Azure AD AUTH. Please refer defaultazurecredential
 
-  **Confluent-Kafka** -> To connect to EventHub using Kafka protocol
+    **Confluent-Kafka** -> To connect to EventHub using Kafka protocol
 
 **Repo Contents**
-  **/eventhub** --> Includes producer and consumer sample with azure sdk for EventHub
 
-  **/eventhub-kafka** --> Includes producer and consumer sample with confluent-kafka and Azure.Identity package
+    **/eventhub** --> Includes producer and consumer sample with azure sdk for EventHub
+
+    **/eventhub-kafka** --> Includes producer and consumer sample with confluent-kafka and Azure.Identity package
 
 **Setup**
+
 Edit the .env file for below values before you open the repo in .devcontainer.
 
-  AZURE_AUTHORITY_HOST=login.microsoftonline.com
-  
-  AZURE_CLIENT_ID=<<AppClientId>>
+    AZURE_AUTHORITY_HOST=login.microsoftonline.com
 
-  AZURE_CLIENT_SECRET=<<AppSecret>>
+    AZURE_CLIENT_ID=<<AppClientId>>
 
-  AZURE_TENANT_ID=<<TenantID>>
+    AZURE_CLIENT_SECRET=<<AppSecret>>
 
-  EVENT_HUB_HOSTNAME=<<EventHubNameSpace>>
+    AZURE_TENANT_ID=<<TenantID>>
 
-  EVENT_HUB_NAME=<<EvemtHubName>>
+    EVENT_HUB_HOSTNAME=<<EventHubNameSpace>>
 
-  CONSUMER_GROUP=<<ConsumerGroupName>>
+    EVENT_HUB_NAME=<<EvemtHubName>>
 
-  VAULT_URL= <<KeyVaultURL To Retrieve Certificate - Only for Cert Cred flow>>
-  
-  AZURE_KV_CLIENT_ID=<<ClientId-KeyVaultAccess>>
-  
-  AZURE_KV_CLIENT_SECRET=<<ClientSecret-KeyVaultAccess>>
+    CONSUMER_GROUP=<<ConsumerGroupName>>
+
+    VAULT_URL= <<KeyVaultURL To Retrieve Certificate - Only for Cert Cred flow>>
+
+    AZURE_KV_CLIENT_ID=<<ClientId-KeyVaultAccess>>
+
+    AZURE_KV_CLIENT_SECRET=<<ClientSecret-KeyVaultAccess>>
   
 ** Docker Container**
+
  Build the container and publish to Azure Container Registry (ACR) 
     
     docker build -t <>.azurecr.io/<>:<> .
