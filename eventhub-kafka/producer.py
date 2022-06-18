@@ -50,7 +50,7 @@ for data in some_data_source:
     # Asynchronously produce a message, the delivery report callback
     # will be triggered from poll() above, or flush() below, when the message has
     # been successfully delivered or failed permanently.
-    producer.produce(EVENTHUB_NAME, data.encode("utf-8"), callback=delivery_report)
+    producer.produce(EVENTHUB_NAME, f"Hello {data}".encode("utf-8"), callback=delivery_report)
 
 # Wait for any outstanding messages to be delivered and delivery report
 # callbacks to be triggered.
