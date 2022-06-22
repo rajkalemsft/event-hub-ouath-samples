@@ -23,7 +23,7 @@ Python code samples to demonstrate ability to connect to Azure EventHub with Kaf
 
 **Setup**
 
-Edit the .env file for below values before you open the repo in .devcontainer. Refer API doc here(https://azuresdkdocs.blob.core.windows.net/$web/python/azure-identity/latest/azure.identity.html#azure.identity.EnvironmentCredential)
+Edit the .env file for below values before you open the repo in .devcontainer. Refer API doc [here](https://azuresdkdocs.blob.core.windows.net/$web/python/azure-identity/latest/azure.identity.html#azure.identity.EnvironmentCredential)
 
     AZURE_AUTHORITY_HOST=login.microsoftonline.com
 
