@@ -1,0 +1,50 @@
+on: [push]
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    
+    - uses: azure/docker-login@v1
+      with:
+        login-server: twohat.azurecr.io
+        username: ${{ secrets.acr_twohat_username }}
+        password: ${{ secrets.acr_twohat_password }}
+    
+    - name: Build and push image to ACR
+      id: build-image
+      run: |
+        docker build "$GITHUB_WORKSPACE/." -f  ".devcontainer/Dockerfile" -t twohat.azurecr.io/rktwohat:${{ github.sha }} --label dockerfile-path=.devcontainer/Dockerfile
+        docker push twohat.azurecr.io/rktwohat:${{ github.sha }}
+    
+    - uses: azure/k8s-set-context@v1
+      with:
+         kubeconfig: ${{ secrets.aks_rktwohat_kubeConfig }}
+      id: login
+    
+    - name: Create namespace
+      run: |
+        namespacePresent=`kubectl get namespace | grep rk-twohat-authsamples | wc -l`
+        if [ $namespacePresent -eq 0 ]
+        then
+            echo `kubectl create namespace rk-twohat-authsamples`
+        fi
+
+    - uses: azure/k8s-create-secret@v1
+      with:
+        namespace: rk-twohat-authsamples
+        container-registry-url: twohat.azurecr.io
+        container-registry-username: ${{ secrets.acr_twohat_username }}
+        container-registry-password: ${{ secrets.acr_twohat_password }}
+        secret-name: rktwohatdockerauth
+       
+    - uses: azure/k8s-deploy@v1.2
+      with:
+        namespace: rk-twohat-authsamples
+        manifests: |
+          manifests/deployment.yml
+          manifests/service.yml
+        images: |
+          twohat.azurecr.io/rktwohat:${{ github.sha }}
+        imagepullsecrets: |
+          rktwohatdockerauth
