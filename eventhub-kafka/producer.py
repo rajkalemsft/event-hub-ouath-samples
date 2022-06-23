@@ -42,7 +42,7 @@ def delivery_report(err, msg):
         print(f"Message delivered to {msg.topic()} [{msg.partition()}]")
 
 
-some_data_source = [str(i) for i in range(1000)]
+some_data_source = [str(i) for i in range(5)]
 for data in some_data_source:
     # Trigger any available delivery report callbacks from previous produce() calls
     producer.poll(0)
