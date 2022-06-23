@@ -1,0 +1,19 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: "rktwohat-f0b0"
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: "rktwohat-f0b0"
+  template:
+    metadata:
+      labels:
+        app: "rktwohat-f0b0"
+    spec:
+      containers:
+        - name: "rktwohat-f0b0"
+          image: "twohat.azurecr.io/rktwohat"
+          ports:
+          - containerPort: 80
