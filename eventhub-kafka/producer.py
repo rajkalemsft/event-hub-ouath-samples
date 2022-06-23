@@ -39,14 +39,14 @@ def delivery_report(err, msg):
     if err is not None:
         print(f"Message delivery failed: {err}")
     else:
-        print(f"Message delivered to {msg.topic()} [{msg.partition()}]")
+        print(f"Message delivered Topic: {msg.topic()}, Partition: [{msg.partition()}], Offset:[{msg.offset()}]")
 
 
-some_data_source = [str(i) for i in range(5)]
+some_data_source = [str(i) for i in range(11,21)]
 for data in some_data_source:
     # Trigger any available delivery report callbacks from previous produce() calls
     producer.poll(0)
-
+    time.sleep(.300)
     # Asynchronously produce a message, the delivery report callback
     # will be triggered from poll() above, or flush() below, when the message has
     # been successfully delivered or failed permanently.

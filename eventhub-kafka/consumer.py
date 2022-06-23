@@ -1,7 +1,7 @@
 import signal
 import sys
 import time
-from confluent_kafka import Consumer
+from confluent_kafka import Consumer, TopicPartition
 from azure.identity import DefaultAzureCredential
 from dotenv import load_dotenv
 import os
@@ -10,7 +10,7 @@ load_dotenv()
 
 FULLY_QUALIFIED_NAMESPACE= os.environ['EVENT_HUB_HOSTNAME']
 EVENTHUB_NAME = os.environ['EVENT_HUB_NAME']
-CONSUMER_GROUP='$Default'
+CONSUMER_GROUP=os.environ['CONSUMER_GROUP']
 AUTH_SCOPE= "https://" + FULLY_QUALIFIED_NAMESPACE +"/.default"
 
 # AAD
@@ -44,7 +44,7 @@ def signal_handler(sig, frame):
 
 signal.signal(signal.SIGINT, signal_handler)
 
-print("consuming " + EVENTHUB_NAME)
+print(f"consuming Topic: {EVENTHUB_NAME}, Consumer Group: {CONSUMER_GROUP}")
 consumer.subscribe([EVENTHUB_NAME])
 
 while True:
@@ -57,4 +57,4 @@ while True:
         continue
 
     print(
-        f"Received message [{msg.partition()}]: {msg.value().decode('utf-8')}")
+        f"Received message Topic: [{msg.topic()}], Partition: [{msg.partition()}], Offset: [{msg.offset()}], Message: {msg.value().decode('utf-8')}")
