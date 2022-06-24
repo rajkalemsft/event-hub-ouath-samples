@@ -1,17 +1,17 @@
 import time
 from confluent_kafka import Producer
-from azure.identity import ManagedIdentityCredential
+from azure.identity import DefaultAzureCredential
 from dotenv import load_dotenv
 import os
 
 load_dotenv()
 
-FULLY_QUALIFIED_NAMESPACE= "rklabeventhub" # os.environ['EVENT_HUB_HOSTNAME']
-EVENTHUB_NAME ="multiple_partitions_single_cg" # os.environ['EVENT_HUB_NAME']
+FULLY_QUALIFIED_NAMESPACE= os.environ['EVENT_HUB_HOSTNAME']
+EVENTHUB_NAME = os.environ['EVENT_HUB_NAME']
 AUTH_SCOPE= "https://" + FULLY_QUALIFIED_NAMESPACE +"/.default"
 
 # AAD
-cred = ManagedIdentityCredential()
+cred = DefaultAzureCredential()
 
 def _get_token(config):
     """Note here value of config comes from sasl.oauthbearer.config below.
